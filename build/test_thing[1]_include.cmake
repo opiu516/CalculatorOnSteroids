@@ -1,0 +1,5 @@
+if(EXISTS "/home/martin/calculator/build/test_thing[1]_tests.cmake")
+  include("/home/martin/calculator/build/test_thing[1]_tests.cmake")
+else()
+  add_test(test_thing_NOT_BUILT test_thing_NOT_BUILT)
+endif()
