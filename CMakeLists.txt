@@ -15,16 +15,16 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(
-  test_thing
-  test/tempTest.cpp
+  unitTests
+  test/allTest.cpp
 )
 target_link_libraries(
-  test_thing
+  unitTests
   GTest::gtest_main
 )
 
 include(GoogleTest)
-gtest_discover_tests(test_thing)
+gtest_discover_tests(unitTests)
 
 add_executable(
     client
@@ -41,6 +41,11 @@ add_executable(
     src/messageDebug.cpp
 )
 
+add_executable(
+    abuseClient
+    src/client/AbuseClient.cpp
+)
+
 target_include_directories(debug PUBLIC
   lib/spdlog/include
 )
@@ -52,3 +57,12 @@ target_include_directories(server PUBLIC
 target_include_directories(client PUBLIC
   lib/spdlog/include
 )
+
+target_include_directories(abuseClient PUBLIC
+  lib/spdlog/include
+)
+
+target_include_directories(unitTests PUBLIC
+  lib/spdlog/include
+)
+

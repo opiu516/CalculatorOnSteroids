@@ -8,13 +8,14 @@
 #include <vector>
 #include <algorithm>
 #include <queue>
+#include <mutex>
 
 class ClientUI{
     public:
         ClientUI(ClientServerCommunicator& comms){
             while(true){
                 int choice;
-                std::cout<<"1 - preform opperation \n2 - close"<<std::endl;
+                std::cout<<"1 - preform opperation \n2 - close \n"<<std::endl;
                 std::cin>>choice;
                 switch (choice)
                 {
@@ -35,13 +36,13 @@ class ClientUI{
         ClientServerCommunicator comms;
         void chooseOperation(ClientServerCommunicator& comms){
             int choice;
-            std::cout<<"1 - + \n2 - - \n3 - * \n4 -* /"<<std::endl;
+            std::cout<<"1 - + \n2 - - \n3 - * \n4 -* /\n5 - concat\n"<<std::endl;
             std::cin>>choice;
-            if(choice < 1 || choice > 4){
+            if(choice < 1 || choice > 5){
                 std::cout<<"BadStuff"<<std::endl;
             }
             std::cout<<"enter 2 args"<<std::endl;
-            int arguments[2];
+            double arguments[2];
             std::cin>>arguments[0]>>arguments[1];
             comms.writeToServer(choice,arguments[0],arguments[1]);
         }
@@ -50,13 +51,15 @@ class ClientUI{
 
 int main(){
     ClientServerCommunicator comms;
+    int running = 1;
     std::thread detector(Detector(),0,[&comms](ServerMessage message){
         if(comms.IdContained(message.messageId)){
             comms.process(message);
+            comms.readMessage();
         }
-    });
+    },std::ref(running));
 
-    std::thread writer(Writer(),1,std::ref(comms.getMessages()));
+    std::thread writer(Writer(),1,std::ref(comms.getMessages()),std::ref(comms.getWritingCueueMutex()),std::ref(running));
 
     ClientUI ui(comms);
     return 0;

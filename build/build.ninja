@@ -100,6 +100,38 @@ build CMakeFiles/test.util: CUSTOM_COMMAND
 build test: phony CMakeFiles/test.util
 
 # =============================================================================
+# Object build statements for EXECUTABLE target abuseClient
+
+
+#############################################
+# Order-only phony target for abuseClient
+
+build cmake_object_order_depends_target_abuseClient: phony || CMakeFiles/abuseClient.dir
+
+build CMakeFiles/abuseClient.dir/src/client/AbuseClient.cpp.o: CXX_COMPILER__abuseClient_Release ../src/client/AbuseClient.cpp || cmake_object_order_depends_target_abuseClient
+  DEP_FILE = CMakeFiles/abuseClient.dir/src/client/AbuseClient.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include
+  OBJECT_DIR = CMakeFiles/abuseClient.dir
+  OBJECT_FILE_DIR = CMakeFiles/abuseClient.dir/src/client
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target abuseClient
+
+
+#############################################
+# Link the executable abuseClient
+
+build abuseClient: CXX_EXECUTABLE_LINKER__abuseClient_Release CMakeFiles/abuseClient.dir/src/client/AbuseClient.cpp.o
+  FLAGS = -O3 -DNDEBUG
+  OBJECT_DIR = CMakeFiles/abuseClient.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = abuseClient
+  TARGET_PDB = abuseClient.dbg
+
+# =============================================================================
 # Object build statements for EXECUTABLE target debug
 
 
@@ -208,38 +240,38 @@ build client: CXX_EXECUTABLE_LINKER__client_Release CMakeFiles/client.dir/src/cl
   TARGET_PDB = client.dbg
 
 # =============================================================================
-# Object build statements for EXECUTABLE target test_thing
+# Object build statements for EXECUTABLE target unitTests
 
 
 #############################################
-# Order-only phony target for test_thing
+# Order-only phony target for unitTests
 
-build cmake_object_order_depends_target_test_thing: phony || cmake_object_order_depends_target_gtest cmake_object_order_depends_target_gtest_main
+build cmake_object_order_depends_target_unitTests: phony || cmake_object_order_depends_target_gtest cmake_object_order_depends_target_gtest_main
 
-build CMakeFiles/test_thing.dir/test/tempTest.cpp.o: CXX_COMPILER__test_thing_Release ../test/tempTest.cpp || cmake_object_order_depends_target_test_thing
-  DEP_FILE = CMakeFiles/test_thing.dir/test/tempTest.cpp.o.d
+build CMakeFiles/unitTests.dir/test/allTest.cpp.o: CXX_COMPILER__unitTests_Release ../test/allTest.cpp || cmake_object_order_depends_target_unitTests
+  DEP_FILE = CMakeFiles/unitTests.dir/test/allTest.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
-  INCLUDES = -isystem _deps/googletest-src/googletest/include -isystem _deps/googletest-src/googletest
-  OBJECT_DIR = CMakeFiles/test_thing.dir
-  OBJECT_FILE_DIR = CMakeFiles/test_thing.dir/test
+  INCLUDES = -I../lib/spdlog/include -isystem _deps/googletest-src/googletest/include -isystem _deps/googletest-src/googletest
+  OBJECT_DIR = CMakeFiles/unitTests.dir
+  OBJECT_FILE_DIR = CMakeFiles/unitTests.dir/test
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target test_thing
+# Link build statements for EXECUTABLE target unitTests
 
 
 #############################################
-# Link the executable test_thing
+# Link the executable unitTests
 
-build test_thing test_thing[1]_tests.cmake: CXX_EXECUTABLE_LINKER__test_thing_Release CMakeFiles/test_thing.dir/test/tempTest.cpp.o | lib/libgtest_main.a lib/libgtest.a || lib/libgtest.a lib/libgtest_main.a
+build unitTests unitTests[1]_tests.cmake: CXX_EXECUTABLE_LINKER__unitTests_Release CMakeFiles/unitTests.dir/test/allTest.cpp.o | lib/libgtest_main.a lib/libgtest.a || lib/libgtest.a lib/libgtest_main.a
   FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libgtest_main.a  lib/libgtest.a
-  OBJECT_DIR = CMakeFiles/test_thing.dir
-  POST_BUILD = cd /home/martin/calculator/build && /usr/local/bin/cmake -D TEST_TARGET=test_thing -D TEST_EXECUTABLE=/home/martin/calculator/build/test_thing -D TEST_EXECUTOR= -D TEST_WORKING_DIR=/home/martin/calculator/build -D TEST_EXTRA_ARGS= -D TEST_PROPERTIES= -D TEST_PREFIX= -D TEST_SUFFIX= -D NO_PRETTY_TYPES=FALSE -D NO_PRETTY_VALUES=FALSE -D TEST_LIST=test_thing_TESTS -D CTEST_FILE=/home/martin/calculator/build/test_thing[1]_tests.cmake -D TEST_DISCOVERY_TIMEOUT=5 -D TEST_XML_OUTPUT_DIR= -P /usr/local/share/cmake-3.20/Modules/GoogleTestAddTests.cmake
+  OBJECT_DIR = CMakeFiles/unitTests.dir
+  POST_BUILD = cd /home/martin/calculator/build && /usr/local/bin/cmake -D TEST_TARGET=unitTests -D TEST_EXECUTABLE=/home/martin/calculator/build/unitTests -D TEST_EXECUTOR= -D TEST_WORKING_DIR=/home/martin/calculator/build -D TEST_EXTRA_ARGS= -D TEST_PROPERTIES= -D TEST_PREFIX= -D TEST_SUFFIX= -D NO_PRETTY_TYPES=FALSE -D NO_PRETTY_VALUES=FALSE -D TEST_LIST=unitTests_TESTS -D CTEST_FILE=/home/martin/calculator/build/unitTests[1]_tests.cmake -D TEST_DISCOVERY_TIMEOUT=5 -D TEST_XML_OUTPUT_DIR= -P /usr/local/share/cmake-3.20/Modules/GoogleTestAddTests.cmake
   PRE_LINK = :
   RESTAT = 1
-  TARGET_FILE = test_thing
-  TARGET_PDB = test_thing.dbg
+  TARGET_FILE = unitTests
+  TARGET_PDB = unitTests.dbg
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
@@ -642,7 +674,7 @@ build libgtest_main.a: phony lib/libgtest_main.a
 #############################################
 # Folder: /home/martin/calculator/build
 
-build all: phony debug server client test_thing _deps/googletest-build/all
+build all: phony abuseClient debug server client unitTests _deps/googletest-build/all
 
 # =============================================================================
 

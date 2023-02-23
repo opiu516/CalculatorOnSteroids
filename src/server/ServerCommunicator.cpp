@@ -7,16 +7,24 @@
 
 class ServerCommunicator{
     public:
+        ServerCommunicator(){
+            ServerMessage message = serverLink.readFromServer();
+            if(message.messageTarget == 0 && message.messageRead == 0){
+                serverLink.readMessage();
+            }
+        }
+
         SharedMemmoryCommunicator getServerLink(){
             return serverLink;
         }
 
-        void writeToServer(int operationCode, int argument1, int argument2,int messageId){
+        void writeToServer(int operationCode, double argument1, double argument2,int messageId,double result){
             ServerMessage newMessage = serverLink.readFromServer();
             newMessage.messageId = messageId;
             newMessage.operationCode = operationCode;
             newMessage.arguments[0] = argument1;
             newMessage.arguments[1] = argument2;
+            newMessage.result = result;
             messages.push(newMessage);
         }
 

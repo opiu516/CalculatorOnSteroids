@@ -8,7 +8,11 @@ int main(){
         std::cin>>temp;
         if(temp == 1)
             serverLink.readMessage();
+        if(temp == 2)
+            serverLink.semaphorePost();
+        if(temp == 3)
+            serverLink.resetSemaphore();
         ServerMessage message = serverLink.readFromServer();
-        spdlog::info("ID - {}, Target - {}, messageRead - {}",message.messageId,message.messageTarget,message.messageRead);
+        spdlog::info("ID - {}, Target - {}, messageRead - {}, semaphore value - {}",message.messageId,message.messageTarget,message.messageRead,serverLink.getSemaphoreValue());
     }
 }

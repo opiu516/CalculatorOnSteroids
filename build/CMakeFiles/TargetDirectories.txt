@@ -4,11 +4,12 @@
 /home/martin/calculator/build/CMakeFiles/rebuild_cache.dir
 /home/martin/calculator/build/CMakeFiles/edit_cache.dir
 /home/martin/calculator/build/CMakeFiles/test.dir
+/home/martin/calculator/build/CMakeFiles/abuseClient.dir
 /home/martin/calculator/build/CMakeFiles/debug.dir
 /home/martin/calculator/build/CMakeFiles/install/local.dir
 /home/martin/calculator/build/CMakeFiles/server.dir
 /home/martin/calculator/build/CMakeFiles/client.dir
-/home/martin/calculator/build/CMakeFiles/test_thing.dir
+/home/martin/calculator/build/CMakeFiles/unitTests.dir
 /home/martin/calculator/build/_deps/googletest-build/CMakeFiles/install/strip.dir
 /home/martin/calculator/build/_deps/googletest-build/CMakeFiles/install/local.dir
 /home/martin/calculator/build/_deps/googletest-build/CMakeFiles/install.dir
