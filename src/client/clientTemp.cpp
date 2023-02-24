@@ -5,8 +5,6 @@
 #include <iostream>
 #include "spdlog/spdlog.h"
 #include <thread>
-#include <vector>
-#include <algorithm>
 #include <queue>
 #include <mutex>
 

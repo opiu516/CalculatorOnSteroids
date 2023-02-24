@@ -2,11 +2,8 @@
 #include"../coreLogic/Detector.cpp"
 #include"../coreLogic/Writer.cpp"
 #include "ServerCommunicator.cpp"
-#include<iostream>
-#include <queue>
 #include <unistd.h>
 #include <thread>
-#include <vector>
 #include "spdlog/spdlog.h"
 #include <mutex>
 #include <string>

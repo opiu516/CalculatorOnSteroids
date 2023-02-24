@@ -1,5 +1,6 @@
 #include "spdlog/spdlog.h"
 #include"coreLogic/commsProtocol.cpp"
+#include <iostream>
 
 int main(){
     SharedMemmoryCommunicator serverLink(0);

@@ -1,8 +1,6 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <stdio.h>
-#include <iostream>
-#include <vector>
 #include "spdlog/spdlog.h"
 #include <semaphore.h>
 
