@@ -62,7 +62,6 @@ class ClientServerCommunicator{
         }
 
         void readMessage(){
-            //spdlog::info("I read");
             serverLink.readMessage();
         }
 

@@ -7,13 +7,6 @@
 
 class ServerCommunicator{
     public:
-        ServerCommunicator(){
-            ServerMessage message = serverLink.readFromServer();
-            if(message.messageTarget == 0 && message.messageRead == 0){
-                serverLink.readMessage();
-            }
-        }
-
         SharedMemmoryCommunicator getServerLink(){
             return serverLink;
         }

@@ -3,6 +3,14 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 
+ServerMessage messageToWrite = {
+  0,
+  11,
+  {1,4},
+  33,
+  2,
+};
+
 TEST(SharedMemmory,ReadsCorrect){
 
     key_t key = ftok("memmory",65);
@@ -19,18 +27,10 @@ TEST(SharedMemmory,ReadsCorrect){
 TEST(SharedMemmory,WritesCorrect){
     SharedMemmoryCommunicator communicator(0);
 
-    ServerMessage message;
-    message.messageId = 10;
-    message.operationCode = 2;
-    message.arguments[0] = 1;
-    message.arguments[1] = 4;
-    message.messageTarget = 0;
-    message.result = 15;
 
-    communicator.writeToServer(message.messageId,message.operationCode,message.arguments[0],
-        message.arguments[1],message.messageTarget,message.result);
+    communicator.writeToServer(messageToWrite);
 
-    EXPECT_TRUE(message == communicator.readFromServer());
+    EXPECT_TRUE(messageToWrite == communicator.readFromServer());
 }
 
 TEST(SharedMemmory,CreatesWithRightExecutor){
@@ -42,13 +42,13 @@ TEST(SharedMemmory,CreatesWithRightExecutor){
 
 TEST(SharedMemmory,WritesUnreadMessage){
     SharedMemmoryCommunicator communicator(0);
-    communicator.writeToServer(0,0,1,1,0,0);
+    communicator.writeToServer(messageToWrite);
     EXPECT_EQ(0,communicator.readFromServer().messageRead);
 }
 
 TEST(SharedMemmory,ReadMessageReadsMessage){
     SharedMemmoryCommunicator communicator(0);
-    communicator.writeToServer(0,0,1,1,0,0);
+    communicator.writeToServer(messageToWrite);
     communicator.readMessage();
     EXPECT_EQ(1,communicator.readFromServer().messageRead);
 }
@@ -61,4 +61,18 @@ TEST(SharedMemmory,GetsUniqueIds){
        EXPECT_TRUE(currentId > lastId);
        lastId = currentId;
     }
+}
+
+TEST(ServerMessage,EqualsOperatorWorksPropperly){
+    ServerMessage message1 = messageToWrite;
+    EXPECT_TRUE(message1 == messageToWrite);
+    message1.messageId = 100;
+    EXPECT_FALSE(message1 == messageToWrite);
+}
+
+TEST(ServerMessage,NotEqualOperatorWorksPropperly){
+    ServerMessage message1 = messageToWrite;
+    EXPECT_FALSE(message1 != messageToWrite);
+    message1.messageId = 100;
+    EXPECT_TRUE(message1 != messageToWrite);
 }

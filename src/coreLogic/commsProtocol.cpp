@@ -53,14 +53,14 @@ class SharedMemmoryCommunicator{
             }
         }
 
-        void writeToServer(int messageId,int operationCode,double argument1, double argument2,int messageTarget,double result){
+        void writeToServer(ServerMessage message){
             sharedMemmory->messageRead = 0;
-            sharedMemmory->messageTarget = messageTarget;
-            sharedMemmory->messageId = messageId;
-            sharedMemmory->operationCode = operationCode;
-            sharedMemmory->arguments[0] = argument1;
-            sharedMemmory->arguments[1] = argument2;
-            sharedMemmory->result = result;
+            sharedMemmory->messageTarget = message.messageTarget;
+            sharedMemmory->messageId = message.messageId;
+            sharedMemmory->operationCode = message.operationCode;
+            sharedMemmory->arguments[0] = message.arguments[0];
+            sharedMemmory->arguments[1] = message.arguments[1];
+            sharedMemmory->result = message.result;
         }
         ServerMessage readFromServer(){
             return *sharedMemmory;

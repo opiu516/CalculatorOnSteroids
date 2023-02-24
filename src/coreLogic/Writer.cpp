@@ -18,7 +18,8 @@ class Writer{
                     std::lock_guard<std::mutex> lock(queueMutex);
                     if(serverLink.readFromServer().messageRead == 1){
                         ServerMessage message = messages.front();
-                        serverLink.writeToServer(message.messageId,message.operationCode,message.arguments[0],message.arguments[1],reciver,message.result);
+                        message.messageTarget = reciver;
+                        serverLink.writeToServer(message);
                         messages.pop();
                     }
                     serverLink.semaphorePost();

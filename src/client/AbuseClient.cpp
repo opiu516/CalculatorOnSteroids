@@ -25,8 +25,8 @@ int main(){
 
     std::thread writer(Writer(),1,std::ref(comms.getMessages()),std::ref(comms.getWritingCueueMutex()),std::ref(running));
 
-    for(int i = 1;i<30000;i++){   
-        sleep(0.3);
+    for(int i = 1;i<3000000;i++){   
+        sleep(0.1);
         int choice = 1 + (std::rand() % static_cast<int>(5 - 1 + 1));
         double arguments[2];
         arguments[0]  = 1 + (std::rand() % static_cast<int>(100 - 1 + 1));

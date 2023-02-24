@@ -3,13 +3,6 @@
 #include "spdlog/spdlog.h"
 #include"../../src/coreLogic/Detector.cpp"
 
-ServerMessage messageToWrite = {
-  0,
-  11,
-  {1,4},
-  33,
-  2,
-};
 
 TEST(Detector, detectsMessage) {
     SharedMemmoryCommunicator communicator(0);
@@ -21,8 +14,7 @@ TEST(Detector, detectsMessage) {
       running = 0;
     },std::ref(running));
 
-    communicator.writeToServer(messageToWrite.messageId,messageToWrite.operationCode,messageToWrite.arguments[0],
-        messageToWrite.arguments[1],messageToWrite.messageTarget,messageToWrite.result);
+    communicator.writeToServer(messageToWrite);
 
     detector.join();
 
@@ -41,14 +33,12 @@ TEST(Detector, detectsMessageForTarget) {
       running = 0;
     },std::ref(running));
 
-    communicator.writeToServer(messageToWrite.messageId,messageToWrite.operationCode,messageToWrite.arguments[0],
-        messageToWrite.arguments[1],messageToWrite.messageTarget,messageToWrite.result);
+    communicator.writeToServer(messageToWrite);
 
     messageToWrite.messageTarget = 0;
     messageToWrite.result = 10;
 
-    communicator.writeToServer(messageToWrite.messageId,messageToWrite.operationCode,messageToWrite.arguments[0],
-        messageToWrite.arguments[1],messageToWrite.messageTarget,messageToWrite.result);
+    communicator.writeToServer(messageToWrite);
 
     detector.join();
 
@@ -64,8 +54,7 @@ TEST(Detector, ServerTimesOutUnreadMessages) {
     std::thread detector(Detector(),1,[&messageRead,&running](ServerMessage message){
     },std::ref(running));
 
-    communicator.writeToServer(messageToWrite.messageId,messageToWrite.operationCode,messageToWrite.arguments[0],
-        messageToWrite.arguments[1],messageToWrite.messageTarget,messageToWrite.result);
+    communicator.writeToServer(messageToWrite);
 
     EXPECT_EQ(0,communicator.readFromServer().messageRead);
     sleep(5);
@@ -83,8 +72,7 @@ TEST(Detector, ClientDoesNotTimeOutMessage) {
     std::thread detector(Detector(),0,[&messageRead,&running](ServerMessage message){
     },std::ref(running));
 
-    communicator.writeToServer(messageToWrite.messageId,messageToWrite.operationCode,messageToWrite.arguments[0],
-        messageToWrite.arguments[1],messageToWrite.messageTarget,messageToWrite.result);
+    communicator.writeToServer(messageToWrite);
 
     EXPECT_EQ(0,communicator.readFromServer().messageRead);
     sleep(5);
