@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <unistd.h>
 #include "spdlog/spdlog.h"
-#include"../../src/coreLogic/Writer.cpp"
+#include "coreLogic/Writer.h"
 #include <mutex>
 #include <queue>
 

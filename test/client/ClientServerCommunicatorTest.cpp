@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <unistd.h>
 #include "spdlog/spdlog.h"
-#include"../../src/client/ClientServerCommunicator.cpp"
+#include"client/ClientServerCommunicator.h"
 #include <mutex>
 #include <queue>
 #include <vector>

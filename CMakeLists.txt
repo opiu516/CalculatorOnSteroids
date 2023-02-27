@@ -14,9 +14,15 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
+
 add_executable(
   unitTests
   test/allTest.cpp
+  src/coreLogic/commsProtocol.cpp
+  src/coreLogic/Detector.cpp
+  src/coreLogic/Writer.cpp
+  src/client/ClientServerCommunicator.cpp
+  src/server/ServerCommunicator.cpp
 )
 target_link_libraries(
   unitTests
@@ -29,40 +35,60 @@ gtest_discover_tests(unitTests)
 add_executable(
     client
     src/client/clientTemp.cpp
+    src/coreLogic/commsProtocol.cpp
+    src/coreLogic/Detector.cpp
+    src/coreLogic/Writer.cpp
+    src/client/ClientServerCommunicator.cpp
 )
 
 add_executable(
     server
     src/server/serverTemp.cpp
+    src/coreLogic/commsProtocol.cpp
+    src/coreLogic/Detector.cpp
+    src/coreLogic/Writer.cpp
+    src/server/ServerCommunicator.cpp
 )
 
 add_executable(
     debug
     src/messageDebug.cpp
+    src/coreLogic/commsProtocol.cpp
+    src/coreLogic/Detector.cpp
+    src/coreLogic/Writer.cpp
 )
 
 add_executable(
     abuseClient
     src/client/AbuseClient.cpp
+    src/coreLogic/commsProtocol.cpp
+    src/coreLogic/Detector.cpp
+    src/coreLogic/Writer.cpp
+    src/client/ClientServerCommunicator.cpp
 )
 
 target_include_directories(debug PUBLIC
   lib/spdlog/include
+  include
 )
 
 target_include_directories(server PUBLIC
   lib/spdlog/include
+  include
 )
 
 target_include_directories(client PUBLIC
   lib/spdlog/include
+  include
 )
 
 target_include_directories(abuseClient PUBLIC
   lib/spdlog/include
+  include
 )
 
 target_include_directories(unitTests PUBLIC
   lib/spdlog/include
+  include
 )
 

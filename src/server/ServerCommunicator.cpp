@@ -1,36 +1,25 @@
-#include <iostream>
 #include "spdlog/spdlog.h"
-#include <thread>
-#include <vector>
 #include <algorithm>
-#include <queue>
+#include "server/ServerCommunicator.h"
 
-class ServerCommunicator{
-    public:
-        SharedMemmoryCommunicator getServerLink(){
-            return serverLink;
-        }
+SharedMemmoryCommunicator ServerCommunicator::getServerLink(){
+    return serverLink;
+}
 
-        void writeToServer(int operationCode, double argument1, double argument2,int messageId,double result){
-            ServerMessage newMessage = serverLink.readFromServer();
-            newMessage.messageId = messageId;
-            newMessage.operationCode = operationCode;
-            newMessage.arguments[0] = argument1;
-            newMessage.arguments[1] = argument2;
-            newMessage.result = result;
-            messages.push(newMessage);
-        }
+void ServerCommunicator::writeToServer(int operationCode, double argument1, double argument2,int messageId,double result){
+    ServerMessage newMessage = serverLink.readFromServer();
+    newMessage.messageId = messageId;
+    newMessage.operationCode = operationCode;
+    newMessage.arguments[0] = argument1;
+    newMessage.arguments[1] = argument2;
+    newMessage.result = result;
+    messages.push(newMessage);
+}
 
-        void readMessage(){
-            serverLink.readMessage();
-        }
+void ServerCommunicator::readMessage(){
+    serverLink.readMessage();
+}
 
-        std::queue<ServerMessage>& getMessages(){
-            return messages;
-        }
-
-    private:
-        SharedMemmoryCommunicator serverLink = SharedMemmoryCommunicator(1);
-        std::queue<ServerMessage> messages;
-
-};
+std::queue<ServerMessage>& ServerCommunicator::getMessages(){
+    return messages;
+}

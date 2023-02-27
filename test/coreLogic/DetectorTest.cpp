@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <unistd.h>
 #include "spdlog/spdlog.h"
-#include"../../src/coreLogic/Detector.cpp"
+#include"coreLogic/Detector.h"
 
 
 TEST(Detector, detectsMessage) {

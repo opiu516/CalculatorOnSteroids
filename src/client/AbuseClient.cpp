@@ -1,7 +1,7 @@
-#include"../coreLogic/commsProtocol.cpp"
-#include"../coreLogic/Detector.cpp"
-#include"../coreLogic/Writer.cpp"
-#include "ClientServerCommunicator.cpp"
+#include "coreLogic/commsProtocol.h"
+#include "coreLogic/Detector.h"
+#include "coreLogic/Writer.h"
+#include "client/ClientServerCommunicator.h"
 #include "spdlog/spdlog.h"
 #include <thread>
 #include <unistd.h>

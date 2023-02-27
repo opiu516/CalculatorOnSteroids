@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include"../../src/coreLogic/commsProtocol.cpp"
+#include"coreLogic/commsProtocol.h"
 #include <sys/ipc.h>
 #include <sys/shm.h>
 

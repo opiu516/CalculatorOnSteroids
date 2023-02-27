@@ -111,7 +111,35 @@ build cmake_object_order_depends_target_abuseClient: phony || CMakeFiles/abuseCl
 build CMakeFiles/abuseClient.dir/src/client/AbuseClient.cpp.o: CXX_COMPILER__abuseClient_Release ../src/client/AbuseClient.cpp || cmake_object_order_depends_target_abuseClient
   DEP_FILE = CMakeFiles/abuseClient.dir/src/client/AbuseClient.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
-  INCLUDES = -I../lib/spdlog/include
+  INCLUDES = -I../lib/spdlog/include -I../include
+  OBJECT_DIR = CMakeFiles/abuseClient.dir
+  OBJECT_FILE_DIR = CMakeFiles/abuseClient.dir/src/client
+
+build CMakeFiles/abuseClient.dir/src/coreLogic/commsProtocol.cpp.o: CXX_COMPILER__abuseClient_Release ../src/coreLogic/commsProtocol.cpp || cmake_object_order_depends_target_abuseClient
+  DEP_FILE = CMakeFiles/abuseClient.dir/src/coreLogic/commsProtocol.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include
+  OBJECT_DIR = CMakeFiles/abuseClient.dir
+  OBJECT_FILE_DIR = CMakeFiles/abuseClient.dir/src/coreLogic
+
+build CMakeFiles/abuseClient.dir/src/coreLogic/Detector.cpp.o: CXX_COMPILER__abuseClient_Release ../src/coreLogic/Detector.cpp || cmake_object_order_depends_target_abuseClient
+  DEP_FILE = CMakeFiles/abuseClient.dir/src/coreLogic/Detector.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include
+  OBJECT_DIR = CMakeFiles/abuseClient.dir
+  OBJECT_FILE_DIR = CMakeFiles/abuseClient.dir/src/coreLogic
+
+build CMakeFiles/abuseClient.dir/src/coreLogic/Writer.cpp.o: CXX_COMPILER__abuseClient_Release ../src/coreLogic/Writer.cpp || cmake_object_order_depends_target_abuseClient
+  DEP_FILE = CMakeFiles/abuseClient.dir/src/coreLogic/Writer.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include
+  OBJECT_DIR = CMakeFiles/abuseClient.dir
+  OBJECT_FILE_DIR = CMakeFiles/abuseClient.dir/src/coreLogic
+
+build CMakeFiles/abuseClient.dir/src/client/ClientServerCommunicator.cpp.o: CXX_COMPILER__abuseClient_Release ../src/client/ClientServerCommunicator.cpp || cmake_object_order_depends_target_abuseClient
+  DEP_FILE = CMakeFiles/abuseClient.dir/src/client/ClientServerCommunicator.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include
   OBJECT_DIR = CMakeFiles/abuseClient.dir
   OBJECT_FILE_DIR = CMakeFiles/abuseClient.dir/src/client
 
@@ -123,7 +151,7 @@ build CMakeFiles/abuseClient.dir/src/client/AbuseClient.cpp.o: CXX_COMPILER__abu
 #############################################
 # Link the executable abuseClient
 
-build abuseClient: CXX_EXECUTABLE_LINKER__abuseClient_Release CMakeFiles/abuseClient.dir/src/client/AbuseClient.cpp.o
+build abuseClient: CXX_EXECUTABLE_LINKER__abuseClient_Release CMakeFiles/abuseClient.dir/src/client/AbuseClient.cpp.o CMakeFiles/abuseClient.dir/src/coreLogic/commsProtocol.cpp.o CMakeFiles/abuseClient.dir/src/coreLogic/Detector.cpp.o CMakeFiles/abuseClient.dir/src/coreLogic/Writer.cpp.o CMakeFiles/abuseClient.dir/src/client/ClientServerCommunicator.cpp.o
   FLAGS = -O3 -DNDEBUG
   OBJECT_DIR = CMakeFiles/abuseClient.dir
   POST_BUILD = :
@@ -143,9 +171,30 @@ build cmake_object_order_depends_target_debug: phony || CMakeFiles/debug.dir
 build CMakeFiles/debug.dir/src/messageDebug.cpp.o: CXX_COMPILER__debug_Release ../src/messageDebug.cpp || cmake_object_order_depends_target_debug
   DEP_FILE = CMakeFiles/debug.dir/src/messageDebug.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
-  INCLUDES = -I../lib/spdlog/include
+  INCLUDES = -I../lib/spdlog/include -I../include
   OBJECT_DIR = CMakeFiles/debug.dir
   OBJECT_FILE_DIR = CMakeFiles/debug.dir/src
+
+build CMakeFiles/debug.dir/src/coreLogic/commsProtocol.cpp.o: CXX_COMPILER__debug_Release ../src/coreLogic/commsProtocol.cpp || cmake_object_order_depends_target_debug
+  DEP_FILE = CMakeFiles/debug.dir/src/coreLogic/commsProtocol.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include
+  OBJECT_DIR = CMakeFiles/debug.dir
+  OBJECT_FILE_DIR = CMakeFiles/debug.dir/src/coreLogic
+
+build CMakeFiles/debug.dir/src/coreLogic/Detector.cpp.o: CXX_COMPILER__debug_Release ../src/coreLogic/Detector.cpp || cmake_object_order_depends_target_debug
+  DEP_FILE = CMakeFiles/debug.dir/src/coreLogic/Detector.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include
+  OBJECT_DIR = CMakeFiles/debug.dir
+  OBJECT_FILE_DIR = CMakeFiles/debug.dir/src/coreLogic
+
+build CMakeFiles/debug.dir/src/coreLogic/Writer.cpp.o: CXX_COMPILER__debug_Release ../src/coreLogic/Writer.cpp || cmake_object_order_depends_target_debug
+  DEP_FILE = CMakeFiles/debug.dir/src/coreLogic/Writer.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include
+  OBJECT_DIR = CMakeFiles/debug.dir
+  OBJECT_FILE_DIR = CMakeFiles/debug.dir/src/coreLogic
 
 
 # =============================================================================
@@ -155,7 +204,7 @@ build CMakeFiles/debug.dir/src/messageDebug.cpp.o: CXX_COMPILER__debug_Release .
 #############################################
 # Link the executable debug
 
-build debug: CXX_EXECUTABLE_LINKER__debug_Release CMakeFiles/debug.dir/src/messageDebug.cpp.o
+build debug: CXX_EXECUTABLE_LINKER__debug_Release CMakeFiles/debug.dir/src/messageDebug.cpp.o CMakeFiles/debug.dir/src/coreLogic/commsProtocol.cpp.o CMakeFiles/debug.dir/src/coreLogic/Detector.cpp.o CMakeFiles/debug.dir/src/coreLogic/Writer.cpp.o
   FLAGS = -O3 -DNDEBUG
   OBJECT_DIR = CMakeFiles/debug.dir
   POST_BUILD = :
@@ -187,7 +236,35 @@ build cmake_object_order_depends_target_server: phony || CMakeFiles/server.dir
 build CMakeFiles/server.dir/src/server/serverTemp.cpp.o: CXX_COMPILER__server_Release ../src/server/serverTemp.cpp || cmake_object_order_depends_target_server
   DEP_FILE = CMakeFiles/server.dir/src/server/serverTemp.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
-  INCLUDES = -I../lib/spdlog/include
+  INCLUDES = -I../lib/spdlog/include -I../include
+  OBJECT_DIR = CMakeFiles/server.dir
+  OBJECT_FILE_DIR = CMakeFiles/server.dir/src/server
+
+build CMakeFiles/server.dir/src/coreLogic/commsProtocol.cpp.o: CXX_COMPILER__server_Release ../src/coreLogic/commsProtocol.cpp || cmake_object_order_depends_target_server
+  DEP_FILE = CMakeFiles/server.dir/src/coreLogic/commsProtocol.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include
+  OBJECT_DIR = CMakeFiles/server.dir
+  OBJECT_FILE_DIR = CMakeFiles/server.dir/src/coreLogic
+
+build CMakeFiles/server.dir/src/coreLogic/Detector.cpp.o: CXX_COMPILER__server_Release ../src/coreLogic/Detector.cpp || cmake_object_order_depends_target_server
+  DEP_FILE = CMakeFiles/server.dir/src/coreLogic/Detector.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include
+  OBJECT_DIR = CMakeFiles/server.dir
+  OBJECT_FILE_DIR = CMakeFiles/server.dir/src/coreLogic
+
+build CMakeFiles/server.dir/src/coreLogic/Writer.cpp.o: CXX_COMPILER__server_Release ../src/coreLogic/Writer.cpp || cmake_object_order_depends_target_server
+  DEP_FILE = CMakeFiles/server.dir/src/coreLogic/Writer.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include
+  OBJECT_DIR = CMakeFiles/server.dir
+  OBJECT_FILE_DIR = CMakeFiles/server.dir/src/coreLogic
+
+build CMakeFiles/server.dir/src/server/ServerCommunicator.cpp.o: CXX_COMPILER__server_Release ../src/server/ServerCommunicator.cpp || cmake_object_order_depends_target_server
+  DEP_FILE = CMakeFiles/server.dir/src/server/ServerCommunicator.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include
   OBJECT_DIR = CMakeFiles/server.dir
   OBJECT_FILE_DIR = CMakeFiles/server.dir/src/server
 
@@ -199,7 +276,7 @@ build CMakeFiles/server.dir/src/server/serverTemp.cpp.o: CXX_COMPILER__server_Re
 #############################################
 # Link the executable server
 
-build server: CXX_EXECUTABLE_LINKER__server_Release CMakeFiles/server.dir/src/server/serverTemp.cpp.o
+build server: CXX_EXECUTABLE_LINKER__server_Release CMakeFiles/server.dir/src/server/serverTemp.cpp.o CMakeFiles/server.dir/src/coreLogic/commsProtocol.cpp.o CMakeFiles/server.dir/src/coreLogic/Detector.cpp.o CMakeFiles/server.dir/src/coreLogic/Writer.cpp.o CMakeFiles/server.dir/src/server/ServerCommunicator.cpp.o
   FLAGS = -O3 -DNDEBUG
   OBJECT_DIR = CMakeFiles/server.dir
   POST_BUILD = :
@@ -219,7 +296,35 @@ build cmake_object_order_depends_target_client: phony || CMakeFiles/client.dir
 build CMakeFiles/client.dir/src/client/clientTemp.cpp.o: CXX_COMPILER__client_Release ../src/client/clientTemp.cpp || cmake_object_order_depends_target_client
   DEP_FILE = CMakeFiles/client.dir/src/client/clientTemp.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
-  INCLUDES = -I../lib/spdlog/include
+  INCLUDES = -I../lib/spdlog/include -I../include
+  OBJECT_DIR = CMakeFiles/client.dir
+  OBJECT_FILE_DIR = CMakeFiles/client.dir/src/client
+
+build CMakeFiles/client.dir/src/coreLogic/commsProtocol.cpp.o: CXX_COMPILER__client_Release ../src/coreLogic/commsProtocol.cpp || cmake_object_order_depends_target_client
+  DEP_FILE = CMakeFiles/client.dir/src/coreLogic/commsProtocol.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include
+  OBJECT_DIR = CMakeFiles/client.dir
+  OBJECT_FILE_DIR = CMakeFiles/client.dir/src/coreLogic
+
+build CMakeFiles/client.dir/src/coreLogic/Detector.cpp.o: CXX_COMPILER__client_Release ../src/coreLogic/Detector.cpp || cmake_object_order_depends_target_client
+  DEP_FILE = CMakeFiles/client.dir/src/coreLogic/Detector.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include
+  OBJECT_DIR = CMakeFiles/client.dir
+  OBJECT_FILE_DIR = CMakeFiles/client.dir/src/coreLogic
+
+build CMakeFiles/client.dir/src/coreLogic/Writer.cpp.o: CXX_COMPILER__client_Release ../src/coreLogic/Writer.cpp || cmake_object_order_depends_target_client
+  DEP_FILE = CMakeFiles/client.dir/src/coreLogic/Writer.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include
+  OBJECT_DIR = CMakeFiles/client.dir
+  OBJECT_FILE_DIR = CMakeFiles/client.dir/src/coreLogic
+
+build CMakeFiles/client.dir/src/client/ClientServerCommunicator.cpp.o: CXX_COMPILER__client_Release ../src/client/ClientServerCommunicator.cpp || cmake_object_order_depends_target_client
+  DEP_FILE = CMakeFiles/client.dir/src/client/ClientServerCommunicator.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include
   OBJECT_DIR = CMakeFiles/client.dir
   OBJECT_FILE_DIR = CMakeFiles/client.dir/src/client
 
@@ -231,7 +336,7 @@ build CMakeFiles/client.dir/src/client/clientTemp.cpp.o: CXX_COMPILER__client_Re
 #############################################
 # Link the executable client
 
-build client: CXX_EXECUTABLE_LINKER__client_Release CMakeFiles/client.dir/src/client/clientTemp.cpp.o
+build client: CXX_EXECUTABLE_LINKER__client_Release CMakeFiles/client.dir/src/client/clientTemp.cpp.o CMakeFiles/client.dir/src/coreLogic/commsProtocol.cpp.o CMakeFiles/client.dir/src/coreLogic/Detector.cpp.o CMakeFiles/client.dir/src/coreLogic/Writer.cpp.o CMakeFiles/client.dir/src/client/ClientServerCommunicator.cpp.o
   FLAGS = -O3 -DNDEBUG
   OBJECT_DIR = CMakeFiles/client.dir
   POST_BUILD = :
@@ -251,9 +356,44 @@ build cmake_object_order_depends_target_unitTests: phony || cmake_object_order_d
 build CMakeFiles/unitTests.dir/test/allTest.cpp.o: CXX_COMPILER__unitTests_Release ../test/allTest.cpp || cmake_object_order_depends_target_unitTests
   DEP_FILE = CMakeFiles/unitTests.dir/test/allTest.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
-  INCLUDES = -I../lib/spdlog/include -isystem _deps/googletest-src/googletest/include -isystem _deps/googletest-src/googletest
+  INCLUDES = -I../lib/spdlog/include -I../include -isystem _deps/googletest-src/googletest/include -isystem _deps/googletest-src/googletest
   OBJECT_DIR = CMakeFiles/unitTests.dir
   OBJECT_FILE_DIR = CMakeFiles/unitTests.dir/test
+
+build CMakeFiles/unitTests.dir/src/coreLogic/commsProtocol.cpp.o: CXX_COMPILER__unitTests_Release ../src/coreLogic/commsProtocol.cpp || cmake_object_order_depends_target_unitTests
+  DEP_FILE = CMakeFiles/unitTests.dir/src/coreLogic/commsProtocol.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include -isystem _deps/googletest-src/googletest/include -isystem _deps/googletest-src/googletest
+  OBJECT_DIR = CMakeFiles/unitTests.dir
+  OBJECT_FILE_DIR = CMakeFiles/unitTests.dir/src/coreLogic
+
+build CMakeFiles/unitTests.dir/src/coreLogic/Detector.cpp.o: CXX_COMPILER__unitTests_Release ../src/coreLogic/Detector.cpp || cmake_object_order_depends_target_unitTests
+  DEP_FILE = CMakeFiles/unitTests.dir/src/coreLogic/Detector.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include -isystem _deps/googletest-src/googletest/include -isystem _deps/googletest-src/googletest
+  OBJECT_DIR = CMakeFiles/unitTests.dir
+  OBJECT_FILE_DIR = CMakeFiles/unitTests.dir/src/coreLogic
+
+build CMakeFiles/unitTests.dir/src/coreLogic/Writer.cpp.o: CXX_COMPILER__unitTests_Release ../src/coreLogic/Writer.cpp || cmake_object_order_depends_target_unitTests
+  DEP_FILE = CMakeFiles/unitTests.dir/src/coreLogic/Writer.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include -isystem _deps/googletest-src/googletest/include -isystem _deps/googletest-src/googletest
+  OBJECT_DIR = CMakeFiles/unitTests.dir
+  OBJECT_FILE_DIR = CMakeFiles/unitTests.dir/src/coreLogic
+
+build CMakeFiles/unitTests.dir/src/client/ClientServerCommunicator.cpp.o: CXX_COMPILER__unitTests_Release ../src/client/ClientServerCommunicator.cpp || cmake_object_order_depends_target_unitTests
+  DEP_FILE = CMakeFiles/unitTests.dir/src/client/ClientServerCommunicator.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include -isystem _deps/googletest-src/googletest/include -isystem _deps/googletest-src/googletest
+  OBJECT_DIR = CMakeFiles/unitTests.dir
+  OBJECT_FILE_DIR = CMakeFiles/unitTests.dir/src/client
+
+build CMakeFiles/unitTests.dir/src/server/ServerCommunicator.cpp.o: CXX_COMPILER__unitTests_Release ../src/server/ServerCommunicator.cpp || cmake_object_order_depends_target_unitTests
+  DEP_FILE = CMakeFiles/unitTests.dir/src/server/ServerCommunicator.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I../lib/spdlog/include -I../include -isystem _deps/googletest-src/googletest/include -isystem _deps/googletest-src/googletest
+  OBJECT_DIR = CMakeFiles/unitTests.dir
+  OBJECT_FILE_DIR = CMakeFiles/unitTests.dir/src/server
 
 
 # =============================================================================
@@ -263,7 +403,7 @@ build CMakeFiles/unitTests.dir/test/allTest.cpp.o: CXX_COMPILER__unitTests_Relea
 #############################################
 # Link the executable unitTests
 
-build unitTests unitTests[1]_tests.cmake: CXX_EXECUTABLE_LINKER__unitTests_Release CMakeFiles/unitTests.dir/test/allTest.cpp.o | lib/libgtest_main.a lib/libgtest.a || lib/libgtest.a lib/libgtest_main.a
+build unitTests unitTests[1]_tests.cmake: CXX_EXECUTABLE_LINKER__unitTests_Release CMakeFiles/unitTests.dir/test/allTest.cpp.o CMakeFiles/unitTests.dir/src/coreLogic/commsProtocol.cpp.o CMakeFiles/unitTests.dir/src/coreLogic/Detector.cpp.o CMakeFiles/unitTests.dir/src/coreLogic/Writer.cpp.o CMakeFiles/unitTests.dir/src/client/ClientServerCommunicator.cpp.o CMakeFiles/unitTests.dir/src/server/ServerCommunicator.cpp.o | lib/libgtest_main.a lib/libgtest.a || lib/libgtest.a lib/libgtest_main.a
   FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = lib/libgtest_main.a  lib/libgtest.a
   OBJECT_DIR = CMakeFiles/unitTests.dir

@@ -1,7 +1,7 @@
-#include"../coreLogic/commsProtocol.cpp"
-#include"../coreLogic/Detector.cpp"
-#include"../coreLogic/Writer.cpp"
-#include "ClientServerCommunicator.cpp"
+#include "coreLogic/commsProtocol.h"
+#include "coreLogic/Detector.h"
+#include "coreLogic/Writer.h"
+#include "client/ClientServerCommunicator.h"
 #include <iostream>
 #include "spdlog/spdlog.h"
 #include <thread>
@@ -60,5 +60,8 @@ int main(){
     std::thread writer(Writer(),1,std::ref(comms.getMessages()),std::ref(comms.getWritingCueueMutex()),std::ref(running));
 
     ClientUI ui(comms);
+    running = 0;
+    writer.join();
+    detector.join();
     return 0;
 }

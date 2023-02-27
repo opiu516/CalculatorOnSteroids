@@ -1,19 +1,9 @@
+#include "coreLogic/commsProtocol.h"
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <stdio.h>
 #include "spdlog/spdlog.h"
-#include <semaphore.h>
 
-
-struct ServerMessage{
-    int messageTarget;
-    int messageId;
-    double arguments[2];
-    double result;
-    int operationCode;
-    int messageRead = 1;
-    int lastMessageId = 0;
-};
 
 bool operator !=(const ServerMessage value1,const ServerMessage value2){
     return value1.messageTarget != value2.messageTarget ||
@@ -30,76 +20,69 @@ bool operator ==(const ServerMessage value1,const ServerMessage value2){
 }
 
 
-class SharedMemmoryCommunicator{
-    public: 
-        SharedMemmoryCommunicator(int executer){
-            this->executer = executer;
+SharedMemmoryCommunicator::SharedMemmoryCommunicator(int executer){
+    this->executer = executer;
 
-            key_t key = ftok("memmory",65);
+    key_t key = ftok("memmory",65);
   
-            shmid = shmget(key,1024,0666|IPC_CREAT);
+    shmid = shmget(key,1024,0666|IPC_CREAT);
   
-            sharedMemmory = (ServerMessage*) shmat(shmid,(void*)0,0);
+    sharedMemmory = (ServerMessage*) shmat(shmid,(void*)0,0);
 
-            semaphore = sem_open("semaphore", O_CREAT, 0644, 1);
-        }
-        ~SharedMemmoryCommunicator(){
-            shmdt(sharedMemmory);
-            sem_close(semaphore);
-            if(executer == 1){
-                shmctl(shmid,IPC_RMID,NULL);
-            }
-        }
+    semaphore = sem_open("semaphore", O_CREAT, 0644, 1);
+}
 
-        void writeToServer(ServerMessage message){
-            sharedMemmory->messageRead = 0;
-            sharedMemmory->messageTarget = message.messageTarget;
-            sharedMemmory->messageId = message.messageId;
-            sharedMemmory->operationCode = message.operationCode;
-            sharedMemmory->arguments[0] = message.arguments[0];
-            sharedMemmory->arguments[1] = message.arguments[1];
-            sharedMemmory->result = message.result;
-        }
-        ServerMessage readFromServer(){
-            return *sharedMemmory;
-        }
+SharedMemmoryCommunicator::~SharedMemmoryCommunicator(){
+    shmdt(sharedMemmory);
+    sem_close(semaphore);
+    if(executer == 1){
+        shmctl(shmid,IPC_RMID,NULL);
+    }
+}
 
-        int getExecuter(){
-            return executer;
-        }
+void SharedMemmoryCommunicator::writeToServer(ServerMessage message){
+    sharedMemmory->messageRead = 0;
+    sharedMemmory->messageTarget = message.messageTarget;
+    sharedMemmory->messageId = message.messageId;
+    sharedMemmory->operationCode = message.operationCode;
+    sharedMemmory->arguments[0] = message.arguments[0];
+    sharedMemmory->arguments[1] = message.arguments[1];
+    sharedMemmory->result = message.result;
+}
 
-        void readMessage(){
-            sharedMemmory->messageRead = 1;
-        }
+ServerMessage SharedMemmoryCommunicator::readFromServer(){
+    return *sharedMemmory;
+}
 
-        int getMessageId(){
-            sharedMemmory->lastMessageId++;
-            return sharedMemmory->lastMessageId;
-        }
+int SharedMemmoryCommunicator::getExecuter(){
+    return executer;
+}
 
-        void semaphoreWait(){
-            sem_wait(&(*semaphore));
-        }
+void SharedMemmoryCommunicator::readMessage(){
+    sharedMemmory->messageRead = 1;
+}
 
-        void semaphorePost(){
-            sem_post(&(*semaphore));
-        }
+int SharedMemmoryCommunicator::getMessageId(){
+    sharedMemmory->lastMessageId++;
+    return sharedMemmory->lastMessageId;
+}
 
-        int getSemaphoreValue(){
-            int value;
-            sem_getvalue(&(*semaphore), &value);
-            return value;
-        }
+void SharedMemmoryCommunicator::semaphoreWait(){
+    sem_wait(&(*semaphore));
+}
 
-        void resetSemaphore(){
-            if(getSemaphoreValue() == 0){
-                semaphorePost();
-            }
-        }
+void SharedMemmoryCommunicator::semaphorePost(){
+    sem_post(&(*semaphore));
+}
 
-    private:
-        ServerMessage *sharedMemmory;
-        int executer;
-        int shmid;
-        sem_t *semaphore; 
-};
+int SharedMemmoryCommunicator::getSemaphoreValue(){
+    int value;
+    sem_getvalue(&(*semaphore), &value);
+    return value;
+}
+
+void SharedMemmoryCommunicator::resetSemaphore(){
+    if(getSemaphoreValue() == 0){
+        semaphorePost();
+    }
+}

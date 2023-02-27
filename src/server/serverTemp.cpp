@@ -1,7 +1,7 @@
-#include"../coreLogic/commsProtocol.cpp"
-#include"../coreLogic/Detector.cpp"
-#include"../coreLogic/Writer.cpp"
-#include "ServerCommunicator.cpp"
+#include "coreLogic/commsProtocol.h"
+#include "coreLogic/Detector.h"
+#include "coreLogic/Writer.h"
+#include "server/ServerCommunicator.h"
 #include <unistd.h>
 #include <thread>
 #include "spdlog/spdlog.h"
@@ -80,7 +80,7 @@ int main(){
         }
     });
 
-        std::thread thread3([&comms,&queue3,&queue3Mutex,&writingCueueMutex](){
+    std::thread thread3([&comms,&queue3,&queue3Mutex,&writingCueueMutex](){
         while(true){
             sleep(0.2);
             if(!queue3.empty()){
@@ -99,5 +99,6 @@ int main(){
 
 
     detector.join();
+    writer.join();
     return 0;
 }
