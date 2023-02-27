@@ -19,7 +19,6 @@ void ClientServerCommunicator::writeToServer(int operationCode, double argument1
     newMessage.operationCode = operationCode;
     newMessage.arguments[0] = argument1;
     newMessage.arguments[1] = argument2;
-    std::lock_guard<std::mutex> messageLock(writingCueueMutex);
     spdlog::info("action - {} ,arg1 - {} , arg2 - {} , ID - {}",operationCode,argument1,argument2,messageId);
     messages.push(newMessage);
 }
@@ -43,13 +42,14 @@ void ClientServerCommunicator::process(ServerMessage message){
             break;
     }
     spdlog::info("{} : {} {} {} = {}",message.messageId,message.arguments[0],sign,message.arguments[1],message.result);
+    readMessage();
 }
 
 std::vector<int> ClientServerCommunicator::getMessageIds(){
     return messageIds;
 }
 
-std::queue<ServerMessage>& ClientServerCommunicator::getMessages(){
+ProtectedQueue<ServerMessage>& ClientServerCommunicator::getMessages(){
     return messages;
 }
 
@@ -62,6 +62,3 @@ void ClientServerCommunicator::readMessage(){
     serverLink.readMessage();
 }
 
-std::mutex& ClientServerCommunicator::getWritingCueueMutex(){
-    return writingCueueMutex;
-}

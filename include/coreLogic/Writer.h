@@ -2,12 +2,11 @@
 #define Writer_h
 
 #include<functional>
-#include<queue>
-#include <mutex>
+#include "coreLogic/ProtectedQueue.h"
 
 class Writer{
     public:
-        void operator()(int reciver,std::queue<ServerMessage> &messages,std::mutex &queueMutex, int &running);
+        void operator()(int reciver,ProtectedQueue<ServerMessage> &messages, int &running);
 };
 
 #endif

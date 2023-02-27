@@ -19,7 +19,7 @@ int main(){
         }
     },std::ref(running));
 
-    std::thread writer(Writer(),SERVER_ID,std::ref(comms.getMessages()),std::ref(comms.getWritingCueueMutex()),std::ref(running));
+    std::thread writer(Writer(),SERVER_ID,std::ref(comms.getMessages()),std::ref(running));
 
     for(int i = 1;i<3000000;i++){   
         sleep(0.1);

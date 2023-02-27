@@ -2,20 +2,18 @@
 #include <unistd.h>
 #include "spdlog/spdlog.h"
 #include "coreLogic/Writer.h"
-#include <mutex>
-#include <queue>
+#include "coreLogic/ProtectedQueue.h"
+
 
 
 TEST(Writer,WritesMessage){
     SharedMemmoryCommunicator communicator(0);
     communicator.readMessage();    
     int running = 1;
-    std::queue<ServerMessage> toWrite;
-    std::mutex queueMutex;
+    ProtectedQueue<ServerMessage> toWrite;
 
-    std::thread writer(Writer(),0,std::ref(toWrite),std::ref(queueMutex),std::ref(running));
+    std::thread writer(Writer(),0,std::ref(toWrite),std::ref(running));
     {
-        std::lock_guard<std::mutex> lock(queueMutex);
         toWrite.push(messageToWrite);
     }
     sleep(1);
@@ -27,10 +25,9 @@ TEST(Writer,WritesMessage){
 TEST(Writer,WritesOnlyIfMessageIsRead){
     SharedMemmoryCommunicator communicator(0);
     int running = 1;
-    std::queue<ServerMessage> toWrite;
-    std::mutex queueMutex;
+    ProtectedQueue<ServerMessage> toWrite;
 
-    std::thread writer(Writer(),0,std::ref(toWrite),std::ref(queueMutex),std::ref(running));
+    std::thread writer(Writer(),0,std::ref(toWrite),std::ref(running));
     communicator.readMessage();
     toWrite.push(messageToWrite);
     messageToWrite.messageId = 22;

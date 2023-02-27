@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include "spdlog/spdlog.h"
 #include"client/ClientServerCommunicator.h"
-#include <mutex>
+#include "coreLogic/ProtectedQueue.h"
 #include <queue>
 #include <vector>
 
@@ -19,10 +19,9 @@ TEST(ClientServerCommunicator,MessagesGetUniqueIds){
     ClientServerCommunicator communicator;
     communicator.writeToServer(1,10,12);
     communicator.writeToServer(1,13,12);
-    std::queue<ServerMessage> messages = communicator.getMessages();
-    ServerMessage message1 = messages.front();
-    messages.pop();
-    ServerMessage message2 = messages.front();
+    ServerMessage message1 = communicator.getMessages().front();
+    communicator.getMessages().pop();
+    ServerMessage message2 = communicator.getMessages().front();
     EXPECT_FALSE(message1.messageId == message2.messageId);
 }
 

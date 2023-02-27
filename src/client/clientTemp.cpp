@@ -6,7 +6,6 @@
 #include "spdlog/spdlog.h"
 #include <thread>
 #include <queue>
-#include <mutex>
 
 class ClientUI{
     public:
@@ -53,11 +52,10 @@ int main(){
     std::thread detector(Detector(),CLIENT_ID,[&comms](ServerMessage message){
         if(comms.IdContained(message.messageId)){
             comms.process(message);
-            comms.readMessage();
         }
     },std::ref(running));
 
-    std::thread writer(Writer(),SERVER_ID,std::ref(comms.getMessages()),std::ref(comms.getWritingCueueMutex()),std::ref(running));
+    std::thread writer(Writer(),SERVER_ID,std::ref(comms.getMessages()),std::ref(running));
 
     ClientUI ui(comms);
     running = 0;
