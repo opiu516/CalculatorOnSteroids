@@ -12,14 +12,14 @@
 int main(){
     ClientServerCommunicator comms;
     int running = 1;
-    std::thread detector(Detector(),0,[&comms](ServerMessage message){
+    std::thread detector(Detector(),CLIENT_ID,[&comms](ServerMessage message){
         if(comms.IdContained(message.messageId)){
             comms.process(message);
             comms.readMessage();
         }
     },std::ref(running));
 
-    std::thread writer(Writer(),1,std::ref(comms.getMessages()),std::ref(comms.getWritingCueueMutex()),std::ref(running));
+    std::thread writer(Writer(),SERVER_ID,std::ref(comms.getMessages()),std::ref(comms.getWritingCueueMutex()),std::ref(running));
 
     for(int i = 1;i<3000000;i++){   
         sleep(0.1);

@@ -3,6 +3,9 @@
 
 #include <semaphore.h>
 
+const int CLIENT_ID = 0;
+const int SERVER_ID = 1;
+
 struct ServerMessage{
     int messageTarget;
     int messageId;

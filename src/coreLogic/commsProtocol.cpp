@@ -35,7 +35,7 @@ SharedMemmoryCommunicator::SharedMemmoryCommunicator(int executer){
 SharedMemmoryCommunicator::~SharedMemmoryCommunicator(){
     shmdt(sharedMemmory);
     sem_close(semaphore);
-    if(executer == 1){
+    if(executer == SERVER_ID){
         shmctl(shmid,IPC_RMID,NULL);
     }
 }

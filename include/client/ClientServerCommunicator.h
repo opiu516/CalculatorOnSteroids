@@ -18,7 +18,7 @@ class ClientServerCommunicator{
         std::mutex& getWritingCueueMutex();
 
     private:
-        SharedMemmoryCommunicator serverLink = SharedMemmoryCommunicator(0);
+        SharedMemmoryCommunicator serverLink = SharedMemmoryCommunicator(CLIENT_ID);
         std::vector<int> messageIds;
         std::queue<ServerMessage> messages;
         std::mutex writingCueueMutex;

@@ -8,6 +8,11 @@
 #include <mutex>
 #include <string>
 
+const int ADDITION = 1;
+const int DIFFERENCE = 2;
+const int MULTIPLY = 3;
+const int DIVISION = 4;
+const int CONCATENATE = 5;
 
 int main(){
     ServerCommunicator comms;
@@ -19,26 +24,26 @@ int main(){
 
 
     int running = 1;
-    std::thread detector(Detector(),1,[&queue1,&queue2,&queue3,&comms,
+    std::thread detector(Detector(),SERVER_ID,[&queue1,&queue2,&queue3,&comms,
         &queue1Mutex,&queue2Mutex,&queue3Mutex]
         (ServerMessage message){
         spdlog::info("id {}, type{}",message.messageId,message.operationCode);
-        if(message.operationCode == 1 || message.operationCode == 2){
+        if(message.operationCode == ADDITION || message.operationCode == DIFFERENCE){
             std::lock_guard<std::mutex> lock(queue1Mutex);
             queue1.push(message);
         }
-        if(message.operationCode == 3 || message.operationCode == 4){
+        if(message.operationCode == MULTIPLY || message.operationCode == DIVISION){
             std::lock_guard<std::mutex> lock(queue2Mutex);
             queue2.push(message);
         }
-        if(message.operationCode == 5){
+        if(message.operationCode == CONCATENATE){
             std::lock_guard<std::mutex> lock(queue3Mutex);
             queue3.push(message);
         }
         comms.readMessage();       
     },std::ref(running));
 
-    std::thread writer(Writer(),0,std::ref(comms.getMessages()),std::ref(writingCueueMutex),std::ref(running));
+    std::thread writer(Writer(),CLIENT_ID,std::ref(comms.getMessages()),std::ref(writingCueueMutex),std::ref(running));
 
     std::thread thread1([&comms,&queue1,&queue1Mutex,&writingCueueMutex](){
         while(true){
@@ -48,7 +53,7 @@ int main(){
                 std::lock_guard<std::mutex> lockWrite(writingCueueMutex);
                 ServerMessage message = queue1.front();
                 double result;
-                if(message.operationCode%2 == 0){
+                if(message.operationCode == DIFFERENCE){
                     result = message.arguments[0] - message.arguments[1];
                 }
                 else{
@@ -68,7 +73,7 @@ int main(){
                 std::lock_guard<std::mutex> lockWrite(writingCueueMutex);
                 ServerMessage message = queue2.front();
                 double result;
-                if(message.operationCode%2 == 0){
+                if(message.operationCode == DIVISION){
                     result = message.arguments[0] / message.arguments[1];
                 }
                 else{

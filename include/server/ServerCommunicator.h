@@ -12,7 +12,7 @@ class ServerCommunicator{
         std::queue<ServerMessage>& getMessages();
 
     private:
-        SharedMemmoryCommunicator serverLink = SharedMemmoryCommunicator(1);
+        SharedMemmoryCommunicator serverLink = SharedMemmoryCommunicator(SERVER_ID);
         std::queue<ServerMessage> messages;
 
 };

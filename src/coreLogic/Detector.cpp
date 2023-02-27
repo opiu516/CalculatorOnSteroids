@@ -23,7 +23,7 @@ void Detector::operator()(int reciver,std::function<void(ServerMessage)> process
             }
             serverLink.semaphorePost();
         }
-        if(reciver == 1 && serverLink.readFromServer().messageRead == 0){
+        if(reciver == SERVER_ID && serverLink.readFromServer().messageRead == 0){
             timeouCounter++;
             if(timeouCounter > 50000){
                 timeouCounter = 0;
