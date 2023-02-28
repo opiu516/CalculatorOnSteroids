@@ -24,22 +24,19 @@ int main(){
 
     std::thread thread1([&comms,&queue1](){
         while(true){
-            sleep(0.2);
-            comms.FirstThread(std::ref(queue1));
+            comms.firstThread(std::ref(queue1));
         }
     });
 
     std::thread thread2([&comms,&queue2](){
         while(true){
-            sleep(0.2);
-            comms.SecondThread(std::ref(queue2));
+            comms.secondThread(std::ref(queue2));
         }
     });
 
     std::thread thread3([&comms,&queue3](){
         while(true){
-            sleep(0.2);
-            comms.ThirdThread(std::ref(queue3));
+            comms.thirdThread(std::ref(queue3));
         }
     });
 

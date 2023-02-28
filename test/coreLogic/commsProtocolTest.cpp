@@ -27,7 +27,6 @@ TEST(SharedMemmory,ReadsCorrect){
 TEST(SharedMemmory,WritesCorrect){
     SharedMemmoryCommunicator communicator(0);
 
-
     communicator.writeToServer(messageToWrite);
 
     EXPECT_TRUE(messageToWrite == communicator.readFromServer());

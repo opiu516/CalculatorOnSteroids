@@ -29,7 +29,7 @@ SharedMemmoryCommunicator::SharedMemmoryCommunicator(int executer){
   
     sharedMemmory = (ServerMessage*) shmat(shmid,(void*)0,0);
 
-    semaphore = sem_open("semaphore", O_CREAT, 0644, 1);
+    semaphore = sem_open("semaphoree", O_CREAT, 0644, 1);
 }
 
 SharedMemmoryCommunicator::~SharedMemmoryCommunicator(){
@@ -41,6 +41,7 @@ SharedMemmoryCommunicator::~SharedMemmoryCommunicator(){
 }
 
 void SharedMemmoryCommunicator::writeToServer(ServerMessage message){
+    semaphoreWait();
     sharedMemmory->messageRead = 0;
     sharedMemmory->messageTarget = message.messageTarget;
     sharedMemmory->messageId = message.messageId;
@@ -48,10 +49,14 @@ void SharedMemmoryCommunicator::writeToServer(ServerMessage message){
     sharedMemmory->arguments[0] = message.arguments[0];
     sharedMemmory->arguments[1] = message.arguments[1];
     sharedMemmory->result = message.result;
+    semaphorePost();
 }
 
 ServerMessage SharedMemmoryCommunicator::readFromServer(){
-    return *sharedMemmory;
+    semaphoreWait();
+    ServerMessage message = *sharedMemmory;
+    semaphorePost();
+    return message;
 }
 
 int SharedMemmoryCommunicator::getExecuter(){
@@ -59,12 +64,17 @@ int SharedMemmoryCommunicator::getExecuter(){
 }
 
 void SharedMemmoryCommunicator::readMessage(){
+    semaphoreWait();
     sharedMemmory->messageRead = 1;
+    semaphorePost();
 }
 
 int SharedMemmoryCommunicator::getMessageId(){
+    semaphoreWait();
     sharedMemmory->lastMessageId++;
-    return sharedMemmory->lastMessageId;
+    int messageId = sharedMemmory->lastMessageId;
+    semaphorePost();
+    return messageId;
 }
 
 void SharedMemmoryCommunicator::semaphoreWait(){

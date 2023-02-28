@@ -16,7 +16,7 @@ TEST(Writer,WritesMessage){
     {
         toWrite.push(messageToWrite);
     }
-    sleep(1);
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     EXPECT_TRUE(messageToWrite == communicator.readFromServer());
     running = 0;
     writer.join();
@@ -33,9 +33,9 @@ TEST(Writer,WritesOnlyIfMessageIsRead){
     messageToWrite.messageId = 22;
     toWrite.push(messageToWrite);
     EXPECT_TRUE(messageToWrite != communicator.readFromServer());
-    sleep(1);
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     communicator.readMessage();
-    sleep(1);
+    std::this_thread::sleep_for(std::chrono::milliseconds(5010));
     EXPECT_TRUE(messageToWrite == communicator.readFromServer());
     running = 0;
     writer.join();

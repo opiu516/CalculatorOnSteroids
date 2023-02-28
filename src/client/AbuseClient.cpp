@@ -4,6 +4,7 @@
 #include "client/ClientServerCommunicator.h"
 #include "spdlog/spdlog.h"
 #include <thread>
+#include <chrono>
 #include <unistd.h>
 #include <random>
 
@@ -21,8 +22,8 @@ int main(){
 
     std::thread writer(Writer(),SERVER_ID,std::ref(comms.getMessages()),std::ref(running));
 
-    for(int i = 1;i<3000000;i++){   
-        sleep(0.1);
+    for(int i = 1;i<30000;i++){   
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
         int choice = 1 + (std::rand() % static_cast<int>(5 - 1 + 1));
         double arguments[2];
         arguments[0]  = 1 + (std::rand() % static_cast<int>(100 - 1 + 1));

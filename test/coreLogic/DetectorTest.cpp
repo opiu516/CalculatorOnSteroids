@@ -57,7 +57,7 @@ TEST(Detector, ServerTimesOutUnreadMessages) {
     communicator.writeToServer(messageToWrite);
 
     EXPECT_EQ(0,communicator.readFromServer().messageRead);
-    sleep(5);
+    std::this_thread::sleep_for(std::chrono::milliseconds(5100));
     EXPECT_EQ(1,communicator.readFromServer().messageRead);
 
     running = 0;
@@ -75,7 +75,7 @@ TEST(Detector, ClientDoesNotTimeOutMessage) {
     communicator.writeToServer(messageToWrite);
 
     EXPECT_EQ(0,communicator.readFromServer().messageRead);
-    sleep(5);
+    std::this_thread::sleep_for(std::chrono::milliseconds(5100));
     EXPECT_EQ(0,communicator.readFromServer().messageRead);
 
     running = 0;

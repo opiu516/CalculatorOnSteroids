@@ -3,12 +3,6 @@
 #include "server/ServerCommunicator.h"
 
 
-const int ADDITION = 1;
-const int DIFFERENCE = 2;
-const int MULTIPLY = 3;
-const int DIVISION = 4;
-const int CONCATENATE = 5;
-
 SharedMemmoryCommunicator ServerCommunicator::getServerLink(){
     return serverLink;
 }
@@ -46,7 +40,7 @@ void ServerCommunicator::proccesInput(ProtectedQueue<ServerMessage>& queue1,
         readMessage();
 }
 
-void ServerCommunicator::FirstThread(ProtectedQueue<ServerMessage>& queue){
+void ServerCommunicator::firstThread(ProtectedQueue<ServerMessage>& queue){
     if(!queue.empty()){
     ServerMessage message = queue.front();
     double result;
@@ -60,7 +54,7 @@ void ServerCommunicator::FirstThread(ProtectedQueue<ServerMessage>& queue){
     queue.pop();
     }
 }
-void ServerCommunicator::SecondThread(ProtectedQueue<ServerMessage>& queue){
+void ServerCommunicator::secondThread(ProtectedQueue<ServerMessage>& queue){
     if(!queue.empty()){
         ServerMessage message = queue.front();
         double result;
@@ -74,7 +68,7 @@ void ServerCommunicator::SecondThread(ProtectedQueue<ServerMessage>& queue){
         queue.pop();
     }
 }
-void ServerCommunicator::ThirdThread(ProtectedQueue<ServerMessage>& queue){
+void ServerCommunicator::thirdThread(ProtectedQueue<ServerMessage>& queue){
     if(!queue.empty()){
         ServerMessage message = queue.front();
         double result;
